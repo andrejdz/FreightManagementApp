@@ -2,6 +2,7 @@
 using FreightManagement.Service.Interface;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -16,16 +17,21 @@ namespace FreightManagement.ViewModel
             IService<Customer> customerService, IService<Truck> truckService,
             IService<Cargo> cargoService)
         {
+            #region Assign services
             _orderService = orderService;
             _customerService = customerService;
             _truckService = truckService;
             _cargoService = cargoService;
+            #endregion
 
+            #region Register messengers
             MessengerInstance.Register<Order>(this,
                 "orderModel", AssignOrder);
             MessengerInstance.Register<Window>(this,
                 "orderView", AssignWindow);
+            #endregion
 
+            #region Create ObservableCollections
             CustomerList = new ObservableCollection<Customer>(_customerService.GetAll().Result);
             TruckList = new ObservableCollection<Truck>(_truckService
                 .GetAll().Result
@@ -33,14 +39,18 @@ namespace FreightManagement.ViewModel
             CargoList = new ObservableCollection<Cargo>(_cargoService
                 .GetAll().Result
                 .Where(c => c.Status == StatusCargoEnum.Waiting));
+            #endregion
         }
 
+        #region RelayCommands
         public ICommand OkCommand => _okCommand ??
             (_okCommand = new RelayCommand(() => OkDialog()));
 
         public ICommand CancelCommand => _cancelCommand ??
             (_cancelCommand = new RelayCommand(() => CloseDialog()));
+        #endregion
 
+        #region Models
         public Order OrderModel
         {
             get { return _orderModel; }
@@ -90,72 +100,21 @@ namespace FreightManagement.ViewModel
                 RaisePropertyChanged(nameof(IsEnded));
             }
         }
+        #endregion
 
-
+        #region observableCollections properties
         public ObservableCollection<Cargo> CargoList { get; set; }
         public ObservableCollection<Customer> CustomerList { get; set; }
         public ObservableCollection<Truck> TruckList { get; set; }
+        #endregion
 
         private void OkDialog()
         {
             if(OrderModel != null && _orderService.GetById(OrderModel.Id) != null
                 && OrderModel.Id != 0)
             {
-                if(TruckModel != null)
-                {
-                    if(IsEnded)
-                    {
-                        OrderModel.Status = StatusEnum.Ended;
-                    }
-                    else
-                    {
-                        OrderModel.Status = StatusEnum.Processing;
-                    }
-
-                    OrderModel.Price = OrderModel.Distance * TruckModel.CostPerKm;
-
-                    Truck freedTruck = _truckService.GetById(OrderModel.TruckId.Value).Result;
-                    freedTruck.Status = AvailabilityEnum.Free;
-                    _truckService.Update(freedTruck);
-
-                    OrderModel.TruckId = TruckModel.Id;
-                    TruckModel.Status = AvailabilityEnum.Busy;
-
-                    _truckService.Update(TruckModel);
-                }
-                else
-                {
-                    if(IsEnded)
-                    {
-                        OrderModel.Status = StatusEnum.Ended;
-                    }
-                    else if(OrderModel.TruckId != null)
-                    {
-                        OrderModel.Status = StatusEnum.Processing;
-                    }
-                    else
-                    {
-                        OrderModel.Status = StatusEnum.InQueue;
-                    }
-                }
-
-                if(CargoModel != null)
-                {
-                    List<Cargo> listCargoes = new List<Cargo>();
-                    listCargoes.AddRange(_orderService.GetById(OrderModel.Id).Result.Cargoes);
-
-                    foreach(var freedCargo in listCargoes)
-                    {
-                        freedCargo.Status = StatusCargoEnum.Waiting;
-                        freedCargo.OrderId = null;
-                        _cargoService.Update(freedCargo);
-                    }
-
-                    CargoModel.Status = StatusCargoEnum.InOrder;
-                    CargoModel.OrderId = OrderModel.Id;
-
-                    _cargoService.Update(CargoModel);
-                }
+                UpdateTruckInOrder();
+                UpdateCargoInOrder();
 
                 if(CustomerModel != null)
                 {
@@ -166,31 +125,20 @@ namespace FreightManagement.ViewModel
             }
             else
             {
-                OrderModel.CustomerId = CustomerModel.Id;
-                OrderModel.TruckId = TruckModel.Id;
-
-                if(OrderModel.TruckId != null)
+                if(CustomerModel == null)
                 {
-                    OrderModel.Price = TruckModel.CostPerKm * OrderModel.Distance;
-                    OrderModel.Status = StatusEnum.Processing;
-
-                    TruckModel.Status = AvailabilityEnum.Busy;
-                    _truckService.Update(TruckModel);
+                    throw new ArgumentNullException("Must be choosed customer!");
                 }
                 else
                 {
-                    OrderModel.Status = StatusEnum.InQueue;
+                    OrderModel.CustomerId = CustomerModel.Id;
                 }
+
+                AddTruckToOrder();
 
                 _orderService.Create(OrderModel);
 
-                if(CargoModel != null)
-                {
-                    Cargo cargo = _cargoService.GetById(CargoModel.Id).Result;
-                    cargo.OrderId = OrderModel.Id;
-                    cargo.Status = StatusCargoEnum.InOrder;
-                    _cargoService.Update(cargo);
-                }
+                AddCargoToOrder();
             }
             _orderDialog.Close();
         }
@@ -201,7 +149,7 @@ namespace FreightManagement.ViewModel
         }
 
         /// <summary>
-        /// Assign order from MainViewModel
+        /// Assigns order from MainViewModel
         /// to OrderModel.
         /// </summary>
         /// <param name="order">Order.</param>
@@ -212,7 +160,7 @@ namespace FreightManagement.ViewModel
         }
 
         /// <summary>
-        /// Assign order view
+        /// Assigns order view
         /// to _orderDialog.
         /// </summary>
         /// <param name="window">Order view.</param>
@@ -221,6 +169,118 @@ namespace FreightManagement.ViewModel
             _orderDialog = window;
         }
 
+        /// <summary>
+        /// Updates truck in order and
+        /// change status.
+        /// </summary>
+        private void UpdateTruckInOrder()
+        {
+            if(TruckModel != null)
+            {
+                if(IsEnded)
+                {
+                    OrderModel.Status = StatusEnum.Ended;
+                }
+                else
+                {
+                    OrderModel.Status = StatusEnum.Processing;
+                }
+
+                OrderModel.Price = OrderModel.Distance * TruckModel.CostPerKm;
+
+                Truck freedTruck = _truckService.GetById(TruckModel.Id).Result;
+                freedTruck.Status = AvailabilityEnum.Free;
+                _truckService.Update(freedTruck);
+
+                OrderModel.TruckId = TruckModel.Id;
+                TruckModel.Status = AvailabilityEnum.Busy;
+
+                _truckService.Update(TruckModel);
+            }
+            else
+            {
+                if(IsEnded)
+                {
+                    OrderModel.Status = StatusEnum.Ended;
+                }
+                else if(OrderModel.TruckId != null)
+                {
+                    OrderModel.Status = StatusEnum.Processing;
+                }
+                else
+                {
+                    OrderModel.Status = StatusEnum.InQueue;
+                }
+            }
+
+            OrderModel.Term = Convert.ToInt16(OrderModel.Distance / 100);
+        }
+
+        /// <summary>
+        /// Updates cargoes in order and
+        /// change status.
+        /// </summary>
+        private void UpdateCargoInOrder()
+        {
+            if(CargoModel != null)
+            {
+                List<Cargo> listCargoes = new List<Cargo>();
+                listCargoes.AddRange(_orderService.GetById(OrderModel.Id).Result.Cargoes);
+
+                foreach(var freedCargo in listCargoes)
+                {
+                    freedCargo.Status = StatusCargoEnum.Waiting;
+                    freedCargo.OrderId = null;
+                    _cargoService.Update(freedCargo);
+                }
+
+                CargoModel.Status = StatusCargoEnum.InOrder;
+                CargoModel.OrderId = OrderModel.Id;
+
+                _cargoService.Update(CargoModel);
+            }
+        }
+
+        /// <summary>
+        /// Adds truck to order and
+        /// change status.
+        /// </summary>
+        private void AddTruckToOrder()
+        {
+            if(TruckModel != null)
+            {
+                OrderModel.TruckId = TruckModel.Id;
+                OrderModel.Price = TruckModel.CostPerKm * OrderModel.Distance;
+
+                OrderModel.Status = StatusEnum.Processing;
+
+                TruckModel.Status = AvailabilityEnum.Busy;
+                _truckService.Update(TruckModel);
+            }
+            else
+            {
+                OrderModel.Status = StatusEnum.InQueue;
+            }
+
+            OrderModel.Term = Convert.ToInt16(OrderModel.Distance / 100);
+        }
+
+        /// <summary>
+        /// Adds cargo to order and
+        /// change status.
+        /// </summary>
+        private void AddCargoToOrder()
+        {
+            if(CargoModel != null)
+            {
+                Cargo cargo = _cargoService.GetById(CargoModel.Id).Result;
+                cargo.OrderId = OrderModel.Id;
+                cargo.Status = StatusCargoEnum.InOrder;
+                _cargoService.Update(cargo);
+            }
+        }
+
+        #region Fields
         private ICommand _okCommand = null;
         private ICommand _cancelCommand = null;
         private IService<Order> _orderService = null;
@@ -233,5 +293,6 @@ namespace FreightManagement.ViewModel
         private Truck _truckModel = null;
         private Cargo _cargoModel = null;
         private bool _isEnded = false;
+        #endregion
     }
 }

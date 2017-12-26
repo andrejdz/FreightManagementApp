@@ -9,10 +9,18 @@
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
     <DockPanel DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
-        <!--<Menu DockPanel.Dock="Top" Height="25">
-            <MenuItem Header="_File" Width="50" Height="25"/>
-            <MenuItem Header="_About" Width="50" Height="25"/>
-        </Menu>-->
+        <Menu DockPanel.Dock="Top" Height="25">
+            <MenuItem Header="_Serialize to XML" Height="25">
+                <MenuItem Header="_Orders" Height="25"
+                          Command="{Binding ObjectsToXML}" CommandParameter="order"/>
+                <MenuItem Header="Customers" Height="25"
+                          Command="{Binding ObjectsToXML}" CommandParameter="customer"/>
+                <MenuItem Header="Trucks" Height="25"
+                          Command="{Binding ObjectsToXML}" CommandParameter="truck"/>
+                <MenuItem Header="C_argoes" Height="25"
+                          Command="{Binding ObjectsToXML}" CommandParameter="cargo"/>
+            </MenuItem>
+        </Menu>
         <TabControl DockPanel.Dock="Top">
             <TabItem Header="Orders" Height="25" Width="75"
                      IsSelected="True">

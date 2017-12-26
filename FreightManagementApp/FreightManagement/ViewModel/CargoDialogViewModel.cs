@@ -12,21 +12,28 @@ namespace FreightManagement.ViewModel
         public CargoDialogViewModel(IService<Cargo> cargoService,
             IService<Order> orderService)
         {
+            #region Assign services
             _cargoService = cargoService;
             _orderService = orderService;
+            #endregion
 
+            #region Register messengers
             MessengerInstance.Register<Cargo>(this,
                 "cargoModel", AssignCargo);
             MessengerInstance.Register<Window>(this,
                 "cargoView", AssignWindow);
+            #endregion
         }
 
+        #region RelayCommands
         public ICommand OkCommand => _okCommand ??
             (_okCommand = new RelayCommand(() => OkDialog()));
 
         public ICommand CancelCommand => _cancelCommand ??
             (_cancelCommand = new RelayCommand(() => CloseDialog()));
+        #endregion
 
+        #region Model
         public Cargo CargoModel
         {
             get { return _cargoModel; }
@@ -36,6 +43,7 @@ namespace FreightManagement.ViewModel
                 RaisePropertyChanged(nameof(CargoModel));
             }
         }
+        #endregion
 
         private void OkDialog()
         {
@@ -77,11 +85,13 @@ namespace FreightManagement.ViewModel
             _cargoDialog = window;
         }
 
+        #region Fields
         private ICommand _okCommand = null;
         private ICommand _cancelCommand = null;
         private IService<Cargo> _cargoService = null;
         private IService<Order> _orderService = null;
         private Window _cargoDialog = null;
         private Cargo _cargoModel = null;
+        #endregion
     }
 }

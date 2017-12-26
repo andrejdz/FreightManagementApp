@@ -13,18 +13,23 @@ namespace FreightManagement.ViewModel
         {
             _service = service;
 
+            #region Register messengers
             MessengerInstance.Register<Customer>(this,
                 "customerModel", AssignCustomer);
             MessengerInstance.Register<Window>(this,
                 "customerView", AssignWindow);
+            #endregion
         }
 
+        #region RelayCommands
         public ICommand OkCommand => _okCommand ??
             (_okCommand = new RelayCommand(() => OkDialog()));
 
         public ICommand CancelCommand => _cancelCommand ??
             (_cancelCommand = new RelayCommand(() => CloseDialog()));
+        #endregion
 
+        #region Model
         public Customer CustomerModel
         {
             get { return _customerModel; }
@@ -34,6 +39,7 @@ namespace FreightManagement.ViewModel
                 RaisePropertyChanged(nameof(CustomerModel));
             }
         }
+        #endregion
 
         private void OkDialog()
         {
@@ -74,10 +80,12 @@ namespace FreightManagement.ViewModel
             _customerDialog = window;
         }
 
+        #region Fields
         private ICommand _okCommand = null;
         private ICommand _cancelCommand = null;
         private IService<Customer> _service = null;
         private Window _customerDialog = null;
         private Customer _customerModel = null;
+        #endregion
     }
 }

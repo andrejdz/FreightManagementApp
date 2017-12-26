@@ -7,7 +7,7 @@
         xmlns:c="clr-namespace:FreightManagement.Converter"
         xmlns:vr="clr-namespace:FreightManagement.ProjectValidationRule"
         mc:Ignorable="d"
-        Title="Manage orders" Height="420" Width="300"
+        Title="Manage orders" Height="380" Width="300"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
@@ -20,11 +20,11 @@
             <ColumnDefinition Width="220"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="330"/>
+            <RowDefinition Height="290"/>
             <RowDefinition Height="90"/>
         </Grid.RowDefinitions>
         <StackPanel HorizontalAlignment="Left"
-                    Height="330" VerticalAlignment="Top"
+                    Height="290" VerticalAlignment="Top"
                     Width="80">
             <Label x:Name="lblDistance" Content="Distance"
                HorizontalAlignment="Left"
@@ -39,10 +39,6 @@
                    Width="70" Height="25"
                    Margin="10,0,0,10"/>
             <Label x:Name="lblAddress" Content="Address"
-                   HorizontalAlignment="Left" VerticalAlignment="Top"
-                   Width="70" Height="25"
-                   Margin="10,0,0,10"/>
-            <Label x:Name="lblTerm" Content="Term"
                    HorizontalAlignment="Left" VerticalAlignment="Top"
                    Width="70" Height="25"
                    Margin="10,0,0,10"/>
@@ -63,7 +59,7 @@
                    Width="70" Height="25"
                    Margin="10,0,0,10"/>
         </StackPanel>
-        <StackPanel Grid.Column="1" HorizontalAlignment="Left" Height="330" VerticalAlignment="Top" Width="212">
+        <StackPanel Grid.Column="1" HorizontalAlignment="Left" Height="290" VerticalAlignment="Top" Width="212">
             <TextBox x:Name="tbDistance" Height="25"
                      Margin="5,10,0,10" Width="190"
                      HorizontalAlignment="Left">
@@ -113,19 +109,6 @@
                     </Binding>
                 </TextBox.Text>
             </TextBox>
-            <TextBox x:Name="tbTerm" Height="25"
-                Margin="5,0,0,10" Width="190"
-                HorizontalAlignment="Left">
-                <TextBox.Text>
-                    <Binding Path="OrderModel.Term" Mode="TwoWay"
-                             UpdateSourceTrigger="PropertyChanged"
-                             Converter="{StaticResource ShortConverter}">
-                        <Binding.ValidationRules>
-                            <vr:ShortValidationRule/>
-                        </Binding.ValidationRules>
-                    </Binding>
-                </TextBox.Text>
-            </TextBox>
             <CheckBox x:Name="cbStatus" Height="25"
                       Margin="5,0,0,10" Width="25"
                       HorizontalAlignment="Left"
@@ -143,7 +126,8 @@
                       HorizontalAlignment="Left"
                       ItemsSource="{Binding Path=CustomerList, Mode=TwoWay,
                                     UpdateSourceTrigger=PropertyChanged}"
-                      SelectedItem="{Binding CustomerModel, Mode=OneWayToSource}"/>
+                      SelectedItem="{Binding CustomerModel, Mode=OneWayToSource}"
+                      SelectedIndex="0"/>
             <ComboBox x:Name="cbCargo" Height="25"
                       Margin="5,0,0,10" Width="190"
                       HorizontalAlignment="Left"
