@@ -1,10 +1,10 @@
 ﻿using FreightManagement.Service.Interface;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace FreightManagement.Service.Abstract
@@ -28,34 +28,42 @@ namespace FreightManagement.Service.Abstract
             {
                 context.SaveChanges();
             }
-            catch(DbUpdateConcurrencyException)
+            catch(DbUpdateConcurrencyException ex)
             {
                 // Update original values from the database 
                 //var entry = ex.Entries.Single();
                 //entry.OriginalValues.SetValues(entry.GetDatabaseValues());
+                _logger.Error(ex, ex.Message);
                 throw;
             }
-            catch(DbUpdateException)
+            catch(DbUpdateException ex)
             {
+                _logger.Error(ex, ex.Message);
                 throw;
             }
-            catch(DbEntityValidationException)
+            catch(DbEntityValidationException ex)
             {
+                _logger.Error(ex, ex.Message);
                 throw;
             }
-            catch(NotSupportedException)
+            catch(NotSupportedException ex)
             {
+                _logger.Error(ex, ex.Message);
                 throw;
             }
-            catch(ObjectDisposedException)
+            catch(ObjectDisposedException ex)
             {
+                _logger.Error(ex, ex.Message);
                 throw;
             }
-            catch(InvalidOperationException)
+            catch(InvalidOperationException ex)
             {
+                _logger.Error(ex, ex.Message);
                 throw;
             }
             #endregion
         }
+
+        protected static Logger _logger = LogManager.GetCurrentClassLogger();
     }
 }

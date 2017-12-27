@@ -4,11 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FreightManagement"
+        xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="800"
         ResizeMode="NoResize"
-        WindowStartupLocation="CenterScreen">
-    <DockPanel DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
+        WindowStartupLocation="CenterScreen"
+        DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
+    <DockPanel>
         <Menu DockPanel.Dock="Top" Height="25">
             <MenuItem Header="_Serialize to XML" Height="25">
                 <MenuItem Header="_Orders" Height="25"
@@ -192,4 +195,9 @@
             </TabItem>
         </TabControl>
     </DockPanel>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <cmd:EventToCommand Command="{Binding ClosingCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
 </Window>

@@ -2,6 +2,7 @@
 using FreightManagement.Service.Interface;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -127,7 +128,8 @@ namespace FreightManagement.ViewModel
             {
                 if(CustomerModel == null)
                 {
-                    throw new ArgumentNullException("Must be choosed customer!");
+                    ArgumentNullException ex = new ArgumentNullException();
+                    _logger.Error(ex, $"Customer must be chosen! {ex.Message}");
                 }
                 else
                 {
@@ -293,6 +295,7 @@ namespace FreightManagement.ViewModel
         private Truck _truckModel = null;
         private Cargo _cargoModel = null;
         private bool _isEnded = false;
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
         #endregion
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using NLog;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Controls;
 
@@ -11,14 +12,18 @@ namespace FreightManagement.ProjectValidationRule
             string convertedValue = (string)value;
             if(string.IsNullOrEmpty(convertedValue) || string.IsNullOrWhiteSpace(convertedValue))
             {
-                return new ValidationResult(false, $"Field empty or contains only whitespaces!");
+                _logger.Info("Field empty or contains only whitespaces!");
+                return new ValidationResult(false, "Field empty or contains only whitespaces!");
             }
             if(convertedValue.Count() > 150)
             {
-                return new ValidationResult(false, $"Length of value grater than 150 character!");
+                _logger.Info("Length of value grater than 150 character!");
+                return new ValidationResult(false, "Length of value grater than 150 character!");
             }
 
             return ValidationResult.ValidResult;
         }
+
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
     }
 }

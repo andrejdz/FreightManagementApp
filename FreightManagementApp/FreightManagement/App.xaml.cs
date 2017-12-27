@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using NLog;
+using System.Windows;
 
 namespace FreightManagement
 {
@@ -7,5 +8,11 @@ namespace FreightManagement
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            _logger.Info("App started!");
+        }
+
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
     }
 }

@@ -9,6 +9,7 @@ using System.Windows;
 using System.Collections.Generic;
 using System.Xml.Linq;
 using System.Linq;
+using NLog;
 
 namespace FreightManagement.ViewModel
 {
@@ -61,6 +62,9 @@ namespace FreightManagement.ViewModel
 
         public ICommand ObjectsToXML => _objectsToXML ??
             (_objectsToXML = new RelayCommand<string>((key) => ToXML(key)));
+
+        public ICommand ClosingCommand => _closingCommand ??
+            (_closingCommand = new RelayCommand(() => ClosingWindow()));
         #endregion
 
         #region ObservableCollections properties
@@ -355,15 +359,25 @@ namespace FreightManagement.ViewModel
             }
         }
 
+        /// <summary>
+        /// Invokes when the current window are closing.
+        /// </summary>
+        private void ClosingWindow()
+        {
+            _logger.Info("App closed");
+        }
+
         #region Fields
         private ICommand _addCommand = null;
         private ICommand _deleteCommand = null;
         private ICommand _updateCommand = null;
         private ICommand _objectsToXML = null;
+        private ICommand _closingCommand = null;
         private IService<Customer> _customerService = null;
         private IService<Truck> _truckService = null;
         private IService<Order> _orderService = null;
         private IService<Cargo> _cargoService = null;
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
         #endregion
     }
 }

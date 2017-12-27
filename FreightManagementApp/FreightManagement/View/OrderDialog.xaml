@@ -126,8 +126,8 @@
                       HorizontalAlignment="Left"
                       ItemsSource="{Binding Path=CustomerList, Mode=TwoWay,
                                     UpdateSourceTrigger=PropertyChanged}"
-                      SelectedItem="{Binding CustomerModel, Mode=OneWayToSource}"
-                      SelectedIndex="0"/>
+                      SelectedItem="{Binding CustomerModel, Mode=OneWayToSource,
+                                    UpdateSourceTrigger=PropertyChanged}"/>
             <ComboBox x:Name="cbCargo" Height="25"
                       Margin="5,0,0,10" Width="190"
                       HorizontalAlignment="Left"

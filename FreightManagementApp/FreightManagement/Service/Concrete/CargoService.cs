@@ -22,7 +22,10 @@ namespace FreightManagement.Service.Concrete
         {
             if(item == null)
             {
-                throw new ArgumentNullException("Try to add null item!");
+                string message = "Try to add null item!";
+                ArgumentNullException ex = new ArgumentNullException(message);
+                _logger.Error(ex, $"{message} {ex.Message}");
+                throw ex;
             }
             _context.Set<Cargo>().Add(item);
             SaveChanges(_context);
@@ -92,7 +95,10 @@ namespace FreightManagement.Service.Concrete
         {
             if(item == null)
             {
-                throw new ArgumentNullException("Try to update nonexistent item!");
+                string message = "Try to update nonexistent item!";
+                ArgumentNullException ex = new ArgumentNullException(message);
+                _logger.Error(ex, $"{message} {ex.Message}");
+                throw ex;
             }
 
             _context.Entry(item).State = EntityState.Modified;
