@@ -10,12 +10,12 @@ namespace FreightManagement.ProjectValidationRule
         {
             if(!short.TryParse((string)value, out _convertedValue))
             {
-                _logger.Info("Must be an integer number!");
+                _logger.Warn("Must be an integer number!");
                 return new ValidationResult(false, "Must be an integer number!");
             }
             if(_convertedValue > short.MaxValue && _convertedValue <= 0)
             {
-                _logger.Info($"Value must be grater than 0" +
+                _logger.Warn($"Value must be grater than 0" +
                     $" and less than {short.MaxValue}");
                 return new ValidationResult(false, $"Value must be grater than 0" +
                     $" and less than {short.MaxValue}");

@@ -11,12 +11,12 @@ namespace FreightManagement.ProjectValidationRule
             if(!decimal.TryParse((string)value, NumberStyles.AllowDecimalPoint,
                 null, out _convertedValue))
             {
-                _logger.Info("Must be decimal number!");
+                _logger.Warn("Must be decimal number!");
                 return new ValidationResult(false, "Must be decimal number!");
             }
             if(_convertedValue > decimal.MaxValue && _convertedValue <= decimal.Zero)
             {
-                _logger.Info($"Value must be grater than {decimal.Zero}" +
+                _logger.Warn($"Value must be grater than {decimal.Zero}" +
                     $" and less than {decimal.MaxValue}");
                 return new ValidationResult(false, $"Value must be grater than {decimal.Zero}" +
                     $" and less than {decimal.MaxValue}");

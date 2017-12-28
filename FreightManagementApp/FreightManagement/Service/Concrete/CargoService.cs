@@ -9,7 +9,7 @@ namespace FreightManagement.Service.Concrete
 {
     public class CargoService : BaseService<Cargo>
     {
-        public CargoService(DbContext context)
+        public CargoService(DbContext context) : base()
         {
             _context = context;
         }
@@ -24,7 +24,7 @@ namespace FreightManagement.Service.Concrete
             {
                 string message = "Try to add null item!";
                 ArgumentNullException ex = new ArgumentNullException(message);
-                _logger.Error(ex, $"{message} {ex.Message}");
+                Logger.Error(ex, $"{message} {ex.Message}");
                 throw ex;
             }
             _context.Set<Cargo>().Add(item);
@@ -97,7 +97,7 @@ namespace FreightManagement.Service.Concrete
             {
                 string message = "Try to update nonexistent item!";
                 ArgumentNullException ex = new ArgumentNullException(message);
-                _logger.Error(ex, $"{message} {ex.Message}");
+                Logger.Error(ex, $"{message} {ex.Message}");
                 throw ex;
             }
 

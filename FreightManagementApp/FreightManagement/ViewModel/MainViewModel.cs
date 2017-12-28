@@ -364,7 +364,7 @@ namespace FreightManagement.ViewModel
         /// </summary>
         private void ClosingWindow()
         {
-            _logger.Info("App closed");
+            _logger.Info("App closed!");
         }
 
         #region Fields

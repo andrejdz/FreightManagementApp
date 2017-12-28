@@ -12,12 +12,12 @@ namespace FreightManagement.ProjectValidationRule
             string convertedValue = (string)value;
             if(string.IsNullOrEmpty(convertedValue) || string.IsNullOrWhiteSpace(convertedValue))
             {
-                _logger.Info("Field empty or contains only whitespaces!");
+                _logger.Warn("Field empty or contains only whitespaces!");
                 return new ValidationResult(false, "Field empty or contains only whitespaces!");
             }
             if(convertedValue.Count() > 20)
             {
-                _logger.Info("Length of value grater than 20 character!");
+                _logger.Warn("Length of value grater than 20 character!");
                 return new ValidationResult(false, "Length of value grater than 20 character!");
             }
 

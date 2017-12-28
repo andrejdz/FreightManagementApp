@@ -12,12 +12,12 @@ namespace FreightManagement.ProjectValidationRule
             string convertedValue = (string)value;
             if(convertedValue == null)
             {
-                _logger.Info("Value equals null!");
+                _logger.Warn("Value equals null!");
                 return new ValidationResult(false, "Value equals null!");
             }
             if(convertedValue.Count() > 20)
             {
-                _logger.Info("Length of value grater than 20 character!");
+                _logger.Warn("Length of value grater than 20 character!");
                 return new ValidationResult(false, "Length of value grater than 20 character!");
             }
 
