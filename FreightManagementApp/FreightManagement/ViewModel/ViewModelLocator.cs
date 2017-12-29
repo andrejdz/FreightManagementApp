@@ -32,6 +32,7 @@ namespace FreightManagement.ViewModel
             SimpleIoc.Default.Register<CustomerDialogViewModel>();
             SimpleIoc.Default.Register<OrderDialogViewModel>();
             SimpleIoc.Default.Register<CargoDialogViewModel>();
+            SimpleIoc.Default.Register<ChartViewModel>();
         }
 
         public MainViewModel Main
@@ -71,6 +72,14 @@ namespace FreightManagement.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<CargoDialogViewModel>();
+            }
+        }
+
+        public ChartViewModel ChartUserControl
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ChartViewModel>();
             }
         }
 

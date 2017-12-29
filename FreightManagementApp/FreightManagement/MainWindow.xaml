@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:FreightManagement"
         xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:v="clr-namespace:FreightManagement.View"
         mc:Ignorable="d"
         Title="{Binding Version, Mode=OneWay}" Height="600" Width="800"
         ResizeMode="NoResize"
@@ -195,6 +196,11 @@
                             </ContextMenu>
                         </DataGrid.ContextMenu>
                     </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Chart" Height="25" Width="75">
+                <Grid>
+                    <v:ChartUserControl/>
                 </Grid>
             </TabItem>
         </TabControl>

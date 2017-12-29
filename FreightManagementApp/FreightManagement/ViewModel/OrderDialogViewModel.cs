@@ -103,7 +103,7 @@ namespace FreightManagement.ViewModel
         }
         #endregion
 
-        #region observableCollections properties
+        #region ObservableCollections properties
         public ObservableCollection<Cargo> CargoList { get; set; }
         public ObservableCollection<Customer> CustomerList { get; set; }
         public ObservableCollection<Truck> TruckList { get; set; }
