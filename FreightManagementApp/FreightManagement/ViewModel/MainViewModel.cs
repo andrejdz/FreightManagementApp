@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Xml.Linq;
 using System.Linq;
 using NLog;
+using System.Reflection;
 
 namespace FreightManagement.ViewModel
 {
@@ -48,6 +49,9 @@ namespace FreightManagement.ViewModel
             OrderList = new ObservableCollection<Order>(_orderService.GetAll().Result);
             CargoList = new ObservableCollection<Cargo>(_cargoService.GetAll().Result);
             #endregion
+
+            Version = $"Freight Management" +
+                $" ver. {Assembly.GetExecutingAssembly().GetName().Version.ToString()}";
         }
 
         #region RelayCommands
@@ -79,6 +83,7 @@ namespace FreightManagement.ViewModel
         public Truck TruckModel { get; set; }
         public Order OrderModel { get; set; }
         public Cargo CargoModel { get; set; }
+        public string Version { get; set; }
         #endregion
 
         private void Add(string key)
@@ -264,7 +269,7 @@ namespace FreightManagement.ViewModel
         /// </summary>
         private void UpdateTruckOnDelete()
         {
-            if(TruckModel != null)
+            if(OrderModel.Truck != null)
             {
                 Truck freedTruck = _truckService.GetById(OrderModel.TruckId.Value).Result;
                 freedTruck.Status = AvailabilityEnum.Free;

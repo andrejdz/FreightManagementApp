@@ -158,6 +158,8 @@ namespace FreightManagement.ViewModel
         private void AssignOrder(Order order)
         {
             OrderModel = order;
+            TruckModel = order.Truck;
+            CustomerModel = order.Customer;
             IsEnded = OrderModel.Status == StatusEnum.Ended ? true : false;
         }
 
@@ -190,9 +192,12 @@ namespace FreightManagement.ViewModel
 
                 OrderModel.Price = OrderModel.Distance * TruckModel.CostPerKm;
 
-                Truck freedTruck = _truckService.GetById(TruckModel.Id).Result;
-                freedTruck.Status = AvailabilityEnum.Free;
-                _truckService.Update(freedTruck);
+                if(OrderModel.Truck != null)
+                {
+                    Truck freedTruck = _truckService.GetById(OrderModel.TruckId.Value).Result;
+                    freedTruck.Status = AvailabilityEnum.Free;
+                    _truckService.Update(freedTruck);
+                }
 
                 OrderModel.TruckId = TruckModel.Id;
                 TruckModel.Status = AvailabilityEnum.Busy;

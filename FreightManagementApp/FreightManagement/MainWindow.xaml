@@ -7,7 +7,7 @@
         xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800"
+        Title="{Binding Version, Mode=OneWay}" Height="600" Width="800"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
@@ -46,27 +46,31 @@
                             <DataGridTextColumn Header="City"
                                                 Binding="{Binding City}" Width="*"/>
                             <DataGridTextColumn Header="Address"
-                                                Binding="{Binding Address}" Width="200"/>
+                                                Binding="{Binding Address}" Width="125"/>
                             <DataGridTextColumn Header="Term"
                                                 Binding="{Binding Term}" Width="*"/>
                             <DataGridTextColumn Header="Status"
                                                 Binding="{Binding Status}" Width="*"/>
+                            <DataGridTextColumn Header="Customer"
+                                                Binding="{Binding Customer.Name}" Width="100"/>
+                            <DataGridTextColumn Header="Truck"
+                                                Binding="{Binding Truck.Name}" Width="100"/>
                             <DataGridComboBoxColumn Header="Cargoes"
                                                     Width="*">
                                 <DataGridComboBoxColumn.ElementStyle>
                                     <Style TargetType="ComboBox">
                                         <Setter Property="ItemsSource"
-                                                Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.OrderModel.Cargoes}"/>
+                                                Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.OrderModel.Cargoes, UpdateSourceTrigger=PropertyChanged}"/>
                                         <Setter Property="IsReadOnly" Value="True"/>
-                                        <Setter Property="SelectedValue" Value="{Binding Description}"/>
+                                        <Setter Property="SelectedIndex" Value="0"/>
                                     </Style>
                                 </DataGridComboBoxColumn.ElementStyle>
                                 <DataGridComboBoxColumn.EditingElementStyle>
                                     <Style TargetType="ComboBox">
                                         <Setter Property="ItemsSource"
-                                                Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.OrderModel.Cargoes}"/>
+                                                Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.OrderModel.Cargoes, UpdateSourceTrigger=PropertyChanged}"/>
                                         <Setter Property="IsReadOnly" Value="True"/>
-                                        <Setter Property="SelectedValue" Value="{Binding Description}"/>
+                                        <Setter Property="SelectedIndex" Value="0"/>
                                     </Style>
                                 </DataGridComboBoxColumn.EditingElementStyle>
                             </DataGridComboBoxColumn>

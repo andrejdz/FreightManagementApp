@@ -13,6 +13,28 @@
     <Window.Resources>
         <c:ShortToStringConverter x:Key="ShortConverter"/>
         <c:DecimalToStringConverter x:Key="DecimalConverter"/>
+        <vr:ShortValidationRule x:Key="ShortValidation"/>
+        <Style TargetType="TextBox">
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate x:Name="textErrorTemplate">
+                        <DockPanel LastChildFill="True">
+                            <AdornedElementPlaceholder>
+                                <Border BorderBrush="Red"
+                                        BorderThickness="2"/>
+                            </AdornedElementPlaceholder>
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="ToolTip"
+                            Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                        Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
     <Grid DataContext="{Binding Source={StaticResource Locator}, Path=OrderDialog}">
         <Grid.ColumnDefinitions>
@@ -66,9 +88,10 @@
                 <TextBox.Text>
                     <Binding Path="OrderModel.Distance" Mode="TwoWay"
                              UpdateSourceTrigger="PropertyChanged"
-                             Converter="{StaticResource ShortConverter}">
+                             Converter="{StaticResource ShortConverter}"
+                             ValidatesOnDataErrors="True" ValidatesOnNotifyDataErrors="True">
                         <Binding.ValidationRules>
-                            <vr:ShortValidationRule/>
+                            <vr:ShortValidationRule ValidatesOnTargetUpdated="True"/>
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox.Text>
@@ -78,9 +101,10 @@
                 HorizontalAlignment="Left">
                 <TextBox.Text>
                     <Binding Path="OrderModel.Country" Mode="TwoWay"
-                             UpdateSourceTrigger="PropertyChanged">
+                             UpdateSourceTrigger="PropertyChanged"
+                             ValidatesOnDataErrors="True" ValidatesOnNotifyDataErrors="True">
                         <Binding.ValidationRules>
-                            <vr:String50CharValidationRule/>
+                            <vr:String50CharValidationRule ValidatesOnTargetUpdated="True"/>
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox.Text>
@@ -90,9 +114,10 @@
                 HorizontalAlignment="Left">
                 <TextBox.Text>
                     <Binding Path="OrderModel.City" Mode="TwoWay"
-                             UpdateSourceTrigger="PropertyChanged">
+                             UpdateSourceTrigger="PropertyChanged"
+                             ValidatesOnDataErrors="True" ValidatesOnNotifyDataErrors="True">
                         <Binding.ValidationRules>
-                            <vr:String50CharValidationRule/>
+                            <vr:String50CharValidationRule ValidatesOnTargetUpdated="True"/>
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox.Text>
@@ -102,9 +127,10 @@
                 HorizontalAlignment="Left" TextWrapping="Wrap">
                 <TextBox.Text>
                     <Binding Path="OrderModel.Address" Mode="TwoWay"
-                             UpdateSourceTrigger="PropertyChanged">
+                             UpdateSourceTrigger="PropertyChanged"
+                             ValidatesOnDataErrors="True" ValidatesOnNotifyDataErrors="True">
                         <Binding.ValidationRules>
-                            <vr:String150CharValidationRule/>
+                            <vr:String150CharValidationRule ValidatesOnTargetUpdated="True"/>
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox.Text>
@@ -120,25 +146,45 @@
                       HorizontalAlignment="Left"
                       ItemsSource="{Binding Path=TruckList, Mode=TwoWay,
                                     UpdateSourceTrigger=PropertyChanged}"
-                      SelectedItem="{Binding TruckModel, Mode=OneWayToSource}"/>
+                      SelectedItem="{Binding TruckModel, Mode=TwoWay}"/>
             <ComboBox x:Name="cbCustomer" Height="25"
                       Margin="5,0,0,10" Width="190"
                       HorizontalAlignment="Left"
                       ItemsSource="{Binding Path=CustomerList, Mode=TwoWay,
                                     UpdateSourceTrigger=PropertyChanged}"
-                      SelectedItem="{Binding CustomerModel, Mode=OneWayToSource,
+                      SelectedItem="{Binding CustomerModel, Mode=TwoWay,
                                     UpdateSourceTrigger=PropertyChanged}"/>
             <ComboBox x:Name="cbCargo" Height="25"
                       Margin="5,0,0,10" Width="190"
                       HorizontalAlignment="Left"
                       ItemsSource="{Binding Path=CargoList, Mode=TwoWay,
                                     UpdateSourceTrigger=PropertyChanged}"
-                      SelectedItem="{Binding CargoModel, Mode=OneWayToSource}"/>
+                      SelectedItem="{Binding CargoModel, Mode=TwoWay}"/>
         </StackPanel>
         <Button x:Name="btnOK" Content="OK"
                 Grid.Column="1" Grid.Row="1"
                 Height="30" Width="50"
                 Command="{Binding OkCommand}" Margin="25,10,145,50">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="IsEnabled" Value="False"/>
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbDistance}"
+                                   Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbCountry}"
+                                   Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbCity}"
+                                   Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbAddress}"
+                                   Value="False"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="True"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
         </Button>
         <Button x:Name="btnCancel" Content="Cancel"
                 Grid.Column="1" Grid.Row="1"

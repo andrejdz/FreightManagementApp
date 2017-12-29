@@ -12,6 +12,27 @@
     <Window.Resources>
         <c:ShortToStringConverter x:Key="ShortConverter"/>
         <c:DecimalToStringConverter x:Key="DecimalConverter"/>
+        <Style TargetType="TextBox">
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate x:Name="textErrorTemplate">
+                        <DockPanel LastChildFill="True">
+                            <AdornedElementPlaceholder>
+                                <Border BorderBrush="Red"
+                                        BorderThickness="2"/>
+                            </AdornedElementPlaceholder>
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="ToolTip"
+                            Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                        Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
     <Grid DataContext="{Binding Source={StaticResource Locator}, Path=CargoDialog}">
         <Grid.ColumnDefinitions>
@@ -41,9 +62,10 @@
                      TextWrapping="Wrap">
                 <TextBox.Text>
                     <Binding Path="CargoModel.Description" Mode="TwoWay"
-                             UpdateSourceTrigger="PropertyChanged">
+                             UpdateSourceTrigger="PropertyChanged"
+                             ValidatesOnDataErrors="True" ValidatesOnNotifyDataErrors="True">
                         <Binding.ValidationRules>
-                            <vr:String150CharValidationRule/>
+                            <vr:String150CharValidationRule ValidatesOnTargetUpdated="True"/>
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox.Text>
@@ -54,9 +76,10 @@
                 <TextBox.Text>
                     <Binding Path="CargoModel.Weight" Mode="TwoWay"
                              UpdateSourceTrigger="PropertyChanged"
-                             Converter="{StaticResource ShortConverter}">
+                             Converter="{StaticResource ShortConverter}"
+                             ValidatesOnDataErrors="True" ValidatesOnNotifyDataErrors="True">
                         <Binding.ValidationRules>
-                            <vr:ShortValidationRule/>
+                            <vr:ShortValidationRule ValidatesOnTargetUpdated="True"/>
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox.Text>
@@ -64,7 +87,24 @@
         </StackPanel>
         <Button x:Name="btnOK" Content="OK"
                 Grid.Column="1" Grid.Row="1" Margin="25,10,145,50"
-                Command="{Binding OkCommand}" Height="30" Width="50"/>
+                Command="{Binding OkCommand}" Height="30" Width="50">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="IsEnabled" Value="False"/>
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbDescription}"
+                                   Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbWeight}"
+                                   Value="False"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="True"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
         <Button x:Name="btnCancel" Content="Cancel"
                 Grid.Column="1" Grid.Row="1" Margin="100,10,70,50"
                 Command="{Binding CancelCommand}" Width="50" Height="30"/>

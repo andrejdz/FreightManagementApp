@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="FreightManagement.View.CustomerDialog" BaseTypeListCollapsed="true">
+    <Position X="17.25" Y="3.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\CustomerDialog.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FreightManagement.ViewModel.CustomerDialogViewModel">
+    <Position X="13.5" Y="0.75" Width="2.25" />
+    <AssociationLine Name="CustomerModel" Type="FreightManagement.Domain.Model.Customer" FixedFromPoint="true">
+      <Path>
+        <Point X="13.5" Y="2.875" />
+        <Point X="11.25" Y="2.875" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_customerModel" Type="FreightManagement.Domain.Model.Customer" FixedFromPoint="true">
+      <Path>
+        <Point X="13.5" Y="2" />
+        <Point X="11.25" Y="2" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_customerDialog" Type="System.Windows.Window">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.2" Y="0.157" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="_service" Type="FreightManagement.Service.Interface.IService&lt;TEntity&gt;">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="0.203" Y="0.309" Height="0.182" Width="0.967" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>QAABAAAAAAACAAAUAAACEAAAAAAAAACIIAAAEAAQAAA=</HashCode>
+      <FileName>ViewModel\CustomerDialogViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_customerModel" />
+      <Field Name="_customerDialog" />
+      <Field Name="_service" />
+      <Property Name="CustomerModel" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FreightManagement.ViewModel.ViewModelLocator" Collapsed="true">
+    <Position X="17.25" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAABQAAAAAAAAAAAAAAAAAAAAAABEABAAA=</HashCode>
+      <FileName>ViewModel\ViewModelLocator.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="CustomerDialog" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FreightManagement.Domain.Model.Customer">
+    <Position X="9" Y="0.75" Width="2.25" />
+    <AssociationLine Name="Orders" Type="FreightManagement.Domain.Model.Order">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-2.295" Y="0.202" Height="0.182" Width="1.945" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier />
+    <ShowAsCollectionAssociation>
+      <Property Name="Orders" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="System.Windows.Window" Collapsed="true">
+    <Position X="17.25" Y="2.5" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="GalaSoft.MvvmLight.ViewModelBase" Collapsed="true">
+    <Position X="17.25" Y="0.75" Width="1.75" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FreightManagement.Domain.Model.Order" Collapsed="true">
+    <Position X="9" Y="4" Width="2.25" />
+    <TypeIdentifier />
+  </Class>
+  <Interface Name="FreightManagement.Service.Interface.IService&lt;TEntity&gt;" Collapsed="true">
+    <Position X="11.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAQAAAIAAAAAAAAAAAAAAAAAAAEAAEAAAgAAAAAAAIA=</HashCode>
+      <FileName>Service\Interface\IService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

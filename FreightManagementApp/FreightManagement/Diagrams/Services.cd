@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="FreightManagement.Service.Abstract.BaseService&lt;TEntity&gt;">
+    <Position X="6.5" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>gAQAAAIAAAIAAAAAAAAAAAAAAAEAAEAAAgAAAAAAAIA=</HashCode>
+      <FileName>Service\Abstract\BaseService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FreightManagement.Service.Concrete.CargoService">
+    <Position X="3.5" Y="1" Width="2.25" />
+    <AssociationLine Name="_context" Type="System.Data.Entity.DbContext" FixedFromPoint="true">
+      <Path>
+        <Point X="5.438" Y="3.387" />
+        <Point X="5.438" Y="4.25" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.966" Y="0.612" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAQAAAIAAAAABAAAAAAAAAAAAAEAAEAAAgAAAAAAAIA=</HashCode>
+      <FileName>Service\Concrete\CargoService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_context" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FreightManagement.Service.Concrete.CustomerService">
+    <Position X="9.75" Y="1" Width="2.5" />
+    <AssociationLine Name="_context" Type="System.Data.Entity.DbContext">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="5.38" Y="0.626" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAQAAAIAAAAABAAAAAAAAAAAAAEAAEAAAgAAAAAAAIA=</HashCode>
+      <FileName>Service\Concrete\CustomerService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_context" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FreightManagement.Service.Concrete.OrderService">
+    <Position X="12.5" Y="0.5" Width="2.25" />
+    <AssociationLine Name="_context" Type="System.Data.Entity.DbContext" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="13.625" Y="2.887" />
+        <Point X="13.625" Y="4.625" />
+        <Point X="5.75" Y="4.625" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="8.14" Y="1.385" Height="0.182" Width="0.862" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAQAAAIAAAAABAAAAAAAAAAAAAEAAEAAAgAAAAAAAIA=</HashCode>
+      <FileName>Service\Concrete\OrderService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_context" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FreightManagement.Service.Concrete.TruckService">
+    <Position X="0.5" Y="0.5" Width="2.25" />
+    <AssociationLine Name="_context" Type="System.Data.Entity.DbContext">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="1.964" Y="1.338" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAQAAAIAAAAABAAAAAAAAAAAAAEAAEAAAgAAAAAAAIA=</HashCode>
+      <FileName>Service\Concrete\TruckService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_context" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="System.Data.Entity.DbContext" Collapsed="true">
+    <Position X="3.5" Y="4.25" Width="2.25" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="FreightManagement.Service.Interface.IService&lt;TEntity&gt;">
+    <Position X="6.5" Y="4.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>gAQAAAIAAAAAAAAAAAAAAAAAAAEAAEAAAgAAAAAAAIA=</HashCode>
+      <FileName>Service\Interface\IService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

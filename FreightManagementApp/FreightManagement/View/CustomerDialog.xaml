@@ -8,6 +8,29 @@
         Title="Manage customers" Height="240" Width="300"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate x:Name="textErrorTemplate">
+                        <DockPanel LastChildFill="True">
+                            <AdornedElementPlaceholder>
+                                <Border BorderBrush="Red"
+                                        BorderThickness="2"/>
+                            </AdornedElementPlaceholder>
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="ToolTip"
+                            Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                        Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid DataContext="{Binding Source={StaticResource Locator}, Path=CustomerDialog}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="80"/>
@@ -43,9 +66,10 @@
                      HorizontalAlignment="Left">
                 <TextBox.Text>
                     <Binding Path="CustomerModel.Name" Mode="TwoWay"
-                             UpdateSourceTrigger="PropertyChanged">
+                             UpdateSourceTrigger="PropertyChanged"
+                             ValidatesOnDataErrors="True" ValidatesOnNotifyDataErrors="True">
                         <Binding.ValidationRules>
-                            <vr:String50CharValidationRule/>
+                            <vr:String50CharValidationRule ValidatesOnTargetUpdated="True"/>
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox.Text>
@@ -55,9 +79,10 @@
                 HorizontalAlignment="Left">
                 <TextBox.Text>
                     <Binding Path="CustomerModel.Manager" Mode="TwoWay"
-                             UpdateSourceTrigger="PropertyChanged">
+                             UpdateSourceTrigger="PropertyChanged"
+                             ValidatesOnDataErrors="True" ValidatesOnNotifyDataErrors="True">
                         <Binding.ValidationRules>
-                            <vr:String50CharValidationRule/>
+                            <vr:String50CharValidationRule ValidatesOnTargetUpdated="True"/>
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox.Text>
@@ -67,9 +92,10 @@
                 HorizontalAlignment="Left">
                 <TextBox.Text>
                     <Binding Path="CustomerModel.Telephone" Mode="TwoWay"
-                             UpdateSourceTrigger="PropertyChanged">
+                             UpdateSourceTrigger="PropertyChanged"
+                             ValidatesOnDataErrors="True" ValidatesOnNotifyDataErrors="True">
                         <Binding.ValidationRules>
-                            <vr:String20CharValidationRule/>
+                            <vr:String20CharValidationRule ValidatesOnTargetUpdated="True"/>
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox.Text>
@@ -79,9 +105,10 @@
                 HorizontalAlignment="Left">
                 <TextBox.Text>
                     <Binding Path="CustomerModel.Fax" Mode="TwoWay"
-                             UpdateSourceTrigger="PropertyChanged">
+                             UpdateSourceTrigger="PropertyChanged"
+                             ValidatesOnDataErrors="True" ValidatesOnNotifyDataErrors="True">
                         <Binding.ValidationRules>
-                            <vr:StringEmptyValidationRule/>
+                            <vr:StringEmptyValidationRule ValidatesOnTargetUpdated="True"/>
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox.Text>
@@ -91,6 +118,26 @@
                 Grid.Column="1" Grid.Row="1"
                 Height="30" Width="50"
                 Command="{Binding OkCommand}" Margin="25,10,145,50">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="IsEnabled" Value="False"/>
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbName}"
+                                   Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbManage}"
+                                   Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbTelephone}"
+                                   Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbFax}"
+                                   Value="False"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="True"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
         </Button>
         <Button x:Name="btnCancel" Content="Cancel"
                 Grid.Column="1" Grid.Row="1"

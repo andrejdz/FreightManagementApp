@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="FreightManagement.ViewModel.CargoDialogViewModel">
+    <Position X="3.75" Y="0.5" Width="2.25" />
+    <InheritanceLine Type="GalaSoft.MvvmLight.ViewModelBase" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.375" Y="4.25" />
+        <Point X="5.375" Y="3.79" />
+      </Path>
+    </InheritanceLine>
+    <AssociationLine Name="_cargoService" Type="FreightManagement.Service.Interface.IService&lt;TEntity&gt;">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.12" Y="0.425" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="_orderService" Type="FreightManagement.Service.Interface.IService&lt;TEntity&gt;">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.195" Y="-0.515" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAkACACEAAAgAAAAAAIICQAAAAQABA=</HashCode>
+      <FileName>ViewModel\CargoDialogViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_cargoService" />
+      <Field Name="_orderService" />
+      <Field Name="_cargoDialog" />
+      <Field Name="_cargoModel" />
+      <Property Name="CargoModel" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FreightManagement.Domain.Model.Cargo">
+    <Position X="7.25" Y="0.5" Width="1.75" />
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Property Name="Order" />
+      <Property Name="Status" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FreightManagement.Domain.Model.Order" Collapsed="true">
+    <Position X="9.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="System.Windows.Window" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="GalaSoft.MvvmLight.ViewModelBase" Collapsed="true">
+    <Position X="3.75" Y="4.25" Width="2.25" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FreightManagement.ViewModel.ViewModelLocator" Collapsed="true">
+    <Position X="0.5" Y="3.75" Width="1.75" />
+    <AssociationLine Name="CargoDialog" Type="FreightManagement.ViewModel.CargoDialogViewModel" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="2.25" Y="4.02" />
+        <Point X="2.625" Y="4.02" />
+        <Point X="2.625" Y="3.438" />
+        <Point X="3.75" Y="3.438" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.404" Y="-0.932" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAABQAAAAAAAAAAAAAAAAAAAAAABEABAAA=</HashCode>
+      <FileName>ViewModel\ViewModelLocator.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="CargoDialog" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FreightManagement.View.CargoDialog" Collapsed="true">
+    <Position X="0.5" Y="2.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\CargoDialog.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="FreightManagement.Service.Interface.IService&lt;TEntity&gt;" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>gAQAAAIAAAAAAAAAAAAAAAAAAAEAAEAAAgAAAAAAAIA=</HashCode>
+      <FileName>Service\Interface\IService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="FreightManagement.Domain.Model.StatusCargoEnum">
+    <Position X="7.25" Y="3.5" Width="1.75" />
+    <TypeIdentifier />
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

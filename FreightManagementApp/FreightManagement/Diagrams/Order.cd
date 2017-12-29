@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="FreightManagement.View.OrderDialog">
+    <Position X="10.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\OrderDialog.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FreightManagement.ViewModel.OrderDialogViewModel">
+    <Position X="4.5" Y="0.5" Width="2" />
+    <AssociationLine Name="CargoList" Type="FreightManagement.Domain.Model.Cargo" FixedFromPoint="true">
+      <Path>
+        <Point X="6.5" Y="4.875" />
+        <Point X="8.25" Y="4.875" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="CustomerList" Type="FreightManagement.Domain.Model.Customer" FixedFromPoint="true">
+      <Path>
+        <Point X="6.5" Y="2.813" />
+        <Point X="8.25" Y="2.813" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.266" Y="0.018" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="CustomerModel" Type="FreightManagement.Domain.Model.Customer" FixedFromPoint="true">
+      <Path>
+        <Point X="6.5" Y="3" />
+        <Point X="8.25" Y="3" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.07" Y="-0.234" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="TruckModel" Type="FreightManagement.Domain.Model.Truck" FixedFromPoint="true">
+      <Path>
+        <Point X="6.5" Y="4" />
+        <Point X="8.25" Y="4" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.12" Y="-0.221" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="TruckList" Type="FreightManagement.Domain.Model.Truck">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="0.248" Y="-0.265" Height="0.182" Width="0.781" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="_cargoService" Type="FreightManagement.Service.Interface.IService&lt;TEntity&gt;" FixedFromPoint="true">
+      <Path>
+        <Point X="4.5" Y="0.875" />
+        <Point X="2" Y="0.875" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.287" Y="0.081" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="_cargoModel" Type="FreightManagement.Domain.Model.Cargo">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.018" Y="-0.286" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="_customerModel" Type="FreightManagement.Domain.Model.Customer" FixedFromPoint="true">
+      <Path>
+        <Point X="6.5" Y="2.562" />
+        <Point X="8.25" Y="2.562" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_customerService" Type="FreightManagement.Service.Interface.IService&lt;TEntity&gt;">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.266" Y="0.102" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="_orderService" Type="FreightManagement.Service.Interface.IService&lt;TEntity&gt;" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.5" Y="1.125" />
+        <Point X="4.125" Y="1.125" />
+        <Point X="4.125" Y="0.953" />
+        <Point X="2" Y="0.953" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.154" Y="-0.234" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="_truckModel" Type="FreightManagement.Domain.Model.Truck">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.154" Y="0.006" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="_truckService" Type="FreightManagement.Service.Interface.IService&lt;TEntity&gt;" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.5" Y="1.438" />
+        <Point X="1.188" Y="1.438" />
+        <Point X="1.188" Y="1.062" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.973" Y="0.154" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>SAAFGAACAAECAAAEQCESEAAIogABAAAIYCQEABAQAAA=</HashCode>
+      <FileName>ViewModel\OrderDialogViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_cargoService" />
+      <Field Name="_cargoModel" />
+      <Field Name="_customerModel" />
+      <Field Name="_customerService" />
+      <Field Name="_orderDialog" />
+      <Field Name="_orderModel" />
+      <Field Name="_orderService" />
+      <Field Name="_truckModel" />
+      <Field Name="_truckService" />
+      <Property Name="CargoModel" />
+      <Property Name="CustomerModel" />
+      <Property Name="OrderModel" />
+      <Property Name="TruckModel" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="CargoList" />
+      <Property Name="CustomerList" />
+      <Property Name="TruckList" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="FreightManagement.ViewModel.ViewModelLocator" Collapsed="true">
+    <Position X="8.25" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAABQAAAAAAAAAAAAAAAAAAAAAABEABAAA=</HashCode>
+      <FileName>ViewModel\ViewModelLocator.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="OrderDialog" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FreightManagement.Domain.Model.Order">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Property Name="Status" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FreightManagement.Domain.Model.Cargo" Collapsed="true">
+    <Position X="8.25" Y="4.5" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FreightManagement.Domain.Model.Customer" Collapsed="true">
+    <Position X="8.25" Y="2.5" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FreightManagement.Domain.Model.Truck" Collapsed="true">
+    <Position X="8.25" Y="3.5" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="System.Windows.Window" Collapsed="true">
+    <Position X="8.25" Y="1.25" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Interface Name="FreightManagement.Service.Interface.IService&lt;TEntity&gt;" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAQAAAIAAAAAAAAAAAAAAAAAAAEAAEAAAgAAAAAAAIA=</HashCode>
+      <FileName>Service\Interface\IService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="FreightManagement.Domain.Model.StatusEnum">
+    <Position X="2.75" Y="4" Width="1.5" />
+    <TypeIdentifier />
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="FreightManagement.MainWindow" Collapsed="true">
+    <Position X="1" Y="4.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FreightManagement.ViewModel.MainViewModel">
+    <Position X="4.75" Y="0.5" Width="2" />
+    <AssociationLine Name="_cargoService" Type="FreightManagement.Service.Interface.IService&lt;TEntity&gt;">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.735" Y="0.06" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="_customerService" Type="FreightManagement.Service.Interface.IService&lt;TEntity&gt;">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.735" Y="0.06" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="_truckService" Type="FreightManagement.Service.Interface.IService&lt;TEntity&gt;">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.735" Y="0.06" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="_orderService" Type="FreightManagement.Service.Interface.IService&lt;TEntity&gt;" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.75" Y="1.438" />
+        <Point X="1.875" Y="1.438" />
+        <Point X="1.875" Y="1.062" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-2.661" Y="0.133" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="TruckList" Type="FreightManagement.Domain.Model.Truck">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.079" Y="-0.294" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAYAqEACKAACAAMLQCAQAAAI4iEBAAAgACAIAAAAUEQ=</HashCode>
+      <FileName>ViewModel\MainViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_cargoService" />
+      <Field Name="_customerService" />
+      <Field Name="_truckService" />
+      <Field Name="_orderService" />
+      <Property Name="CargoModel" />
+      <Property Name="CustomerModel" />
+      <Property Name="OrderModel" />
+      <Property Name="TruckModel" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="CargoList" />
+      <Property Name="CustomerList" />
+      <Property Name="OrderList" />
+      <Property Name="TruckList" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="FreightManagement.ViewModel.ViewModelLocator" Collapsed="true">
+    <Position X="1" Y="2.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAABQAAAAAAAAAAAAAAAAAAAAAABEABAAA=</HashCode>
+      <FileName>ViewModel\ViewModelLocator.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Main" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GalaSoft.MvvmLight.ViewModelBase" Collapsed="true">
+    <Position X="1" Y="1.75" Width="1.75" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="System.Windows.Window" Collapsed="true">
+    <Position X="1" Y="3.5" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FreightManagement.Domain.Model.Cargo" Collapsed="true">
+    <Position X="8.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FreightManagement.Domain.Model.Customer" Collapsed="true">
+    <Position X="8.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FreightManagement.Domain.Model.Order" Collapsed="true">
+    <Position X="8.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FreightManagement.Domain.Model.Truck" Collapsed="true">
+    <Position X="8.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Interface Name="FreightManagement.Service.Interface.IService&lt;TEntity&gt;" Collapsed="true">
+    <Position X="1" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>gAQAAAIAAAAAAAAAAAAAAAAAAAEAAEAAAgAAAAAAAIA=</HashCode>
+      <FileName>Service\Interface\IService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

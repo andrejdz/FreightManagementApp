@@ -159,6 +159,15 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Diagrams\Cargo.cd" />
+    <None Include="Diagrams\ViewModelLocator.cd" />
+    <None Include="Diagrams\Customer.cd" />
+    <None Include="Diagrams\DbContext.cd" />
+    <None Include="Diagrams\MainViewModel.cd" />
+    <None Include="Diagrams\Models.cd" />
+    <None Include="Diagrams\Order.cd" />
+    <None Include="Diagrams\Services.cd" />
+    <None Include="Diagrams\Truck.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
